@@ -1,0 +1,446 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Billing Settings - ProManage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=Geist:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#292a2a",
+                        "primary-container": "#8083ff",
+                        "on-primary-fixed": "#07006c",
+                        "background": "#121414",
+                        "on-surface": "#e3e2e2",
+                        "surface-dim": "#121414",
+                        "surface-container-lowest": "#0d0e0f",
+                        "on-background": "#e3e2e2",
+                        "on-tertiary-container": "#452000",
+                        "primary": "#c0c1ff",
+                        "on-tertiary": "#4f2500",
+                        "on-secondary-container": "#00344e",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary-fixed-dim": "#89ceff",
+                        "secondary": "#89ceff",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "on-secondary": "#00344d",
+                        "on-primary-container": "#0d0096",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "surface-variant": "#343535",
+                        "error": "#ffb4ab",
+                        "on-primary": "#1000a9",
+                        "on-secondary-fixed": "#001e2f",
+                        "on-tertiary-fixed": "#301400",
+                        "inverse-surface": "#e3e2e2",
+                        "outline-variant": "#464554",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-surface-variant": "#c7c4d7",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "tertiary": "#ffb783",
+                        "primary-fixed": "#e1e0ff",
+                        "secondary-container": "#00a2e6",
+                        "tertiary-container": "#d97721",
+                        "surface-tint": "#c0c1ff",
+                        "surface": "#121414",
+                        "outline": "#908fa0",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#2f3131",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "surface-container": "#1e2020",
+                        "surface-bright": "#38393a",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdcc5",
+                        "surface-container-highest": "#343535",
+                        "inverse-primary": "#494bd6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "2xl": "64px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "lg": "24px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "code-sm": ["Geist"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Geist"],
+                        "headline-lg-mobile": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(28, 28, 28, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #262626;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #343535;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-primary/30">
+<!-- SideNavBar from COMPONENTS_4 -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-lg px-md bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant w-64 z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tight">ProManage</h1>
+<p class="text-on-surface-variant text-label-md font-label-md">Elite Portfolio</p>
+</div>
+<nav class="flex-1 space-y-xs overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabDashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabProperties.html">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-body-md">Properties</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabTenants.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Tenants</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabLeases.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md">Leases</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabPayments.html">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Payments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabExpense.html">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-body-md">Expenses</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabMaintenance.html">
+<span class="material-symbols-outlined">build</span>
+<span class="font-body-md">Maintenance</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabDocuments.html">
+<span class="material-symbols-outlined">folder</span>
+<span class="font-body-md">Documents</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabReports.html">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-body-md">Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-surface-container-high text-primary font-bold border-r-2 border-primary transition-colors" href="settingsProfile.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-md rounded-xl font-bold hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="font-label-md">Add Property</span>
+</button>
+</div>
+</aside>
+<!-- TopAppBar from COMPONENTS_4 -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-surface dark:bg-surface border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-full py-sm pl-xl pr-md text-body-md focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-outline" placeholder="Search billing or settings..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-opacity active:scale-95 duration-100">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-opacity active:scale-95 duration-100">help_outline</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAhJ1EXskxPeBNAdjQ9uH0FSd5ljtvRy1YZAYPwn7uo6Jsj1jwR19C72u7JUyi-yDCVhrVcYuna05ECicOxHM4srEUgpEiOuh7F5tZpsJ0Ld_MKujiHExw1WS4vdC-UQXZT41RckBM4u07QzQ8wOTOI1b4L6YHar1a9_lIW3TrLmNCdnZualEM4TFsNx4lNadbO8SyRB2GrsTBMBljJZIlIDabg-RvLsDkybJEV49p_-noia0ITJm80RGitPChqcvh9_4Z87OX9vhH">
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-margin-desktop min-h-screen">
+<div class="max-w-6xl mx-auto space-y-xl">
+<!-- Page Header & Tab Navigation (Unified with SCREEN_2) -->
+<div class="space-y-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Account Settings</h2>
+<p class="text-on-surface-variant font-body-md">Manage your personal profile, security, and enterprise team settings.</p>
+</div>
+<div class="flex items-center gap-xl border-b border-outline-variant">
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all">Profile</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all">Security</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all">Team</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all">Notifications</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-primary text-primary font-bold transition-all">Billing</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all">Integrations</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all">Permissions</button>
+</div>
+</div>
+<!-- Bento Grid Layout for Billing Content -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Active Plan Card -->
+<div class="col-span-12 lg:col-span-8 glass-card rounded-xl p-lg flex flex-col justify-between overflow-hidden relative group">
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-primary opacity-5 blur-[80px] rounded-full group-hover:opacity-10 transition-opacity"></div>
+<div class="relative">
+<div class="flex justify-between items-start mb-lg">
+<div>
+<span class="bg-primary-container/20 text-primary-fixed text-label-md px-sm py-1 rounded-full uppercase tracking-wider mb-sm inline-block">Active Subscription</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Enterprise Plan</h2>
+<p class="text-on-surface-variant text-body-md">Your plan resets on September 15, 2024</p>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-bold hover:opacity-80 transition-opacity">Upgrade Plan</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-end">
+<div>
+<div class="flex justify-between items-end mb-sm">
+<span class="text-body-md font-medium text-on-surface">Property Limit</span>
+<span class="text-label-md text-on-surface-variant"><span class="text-primary font-bold">142</span> / 250 properties</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_12px_rgba(192,193,255,0.4)]" style="width: 56.8%;"></div>
+</div>
+</div>
+<div class="flex gap-xl border-l border-outline-variant/30 pl-xl">
+<div>
+<p class="text-label-md text-on-surface-variant mb-xs">Monthly Cost</p>
+<p class="text-headline-md font-bold">R1,250.00</p>
+</div>
+<div>
+<p class="text-label-md text-on-surface-variant mb-xs">Users</p>
+<p class="text-headline-md font-bold">12 / ∞</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Next Payment Quick Info -->
+<div class="col-span-12 lg:col-span-4 glass-card rounded-xl p-lg flex flex-col">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-tertiary">schedule</span>
+<h3 class="font-headline-md text-on-surface">Upcoming Invoice</h3>
+</div>
+<div class="mb-auto">
+<h4 class="text-headline-xl text-on-surface">R1,250.00</h4>
+<p class="text-body-md text-on-surface-variant mt-xs">Due August 15, 2024</p>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant flex items-center justify-between">
+<span class="text-label-md text-on-surface-variant uppercase">Payment Auto-Charge</span>
+<div class="w-10 h-5 bg-secondary-container rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Payment Methods & Billing Contact -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-gutter">
+<div class="glass-card rounded-xl p-lg">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-headline-md text-on-surface">Payment Methods</h3>
+<button class="text-primary text-label-md flex items-center gap-xs hover:underline">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                            Add New
+                        </button>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg flex items-center gap-md group hover:border-primary transition-colors cursor-pointer">
+<div class="w-12 h-8 bg-surface-container-highest rounded flex items-center justify-center text-label-md font-bold text-on-surface-variant">VISA</div>
+<div class="flex-1">
+<div class="flex items-center gap-sm">
+<p class="font-medium text-on-surface">•••• 4242</p>
+<span class="bg-secondary/20 text-secondary text-[10px] px-2 py-0.5 rounded-full uppercase">Default</span>
+</div>
+<p class="text-label-md text-on-surface-variant">Expires 12/26</p>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant group-hover:text-error opacity-0 group-hover:opacity-100 transition-all">delete</button>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg flex items-center gap-md group hover:border-primary transition-colors cursor-pointer">
+<div class="w-12 h-8 bg-surface-container-highest rounded flex items-center justify-center text-label-md font-bold text-on-surface-variant">MC</div>
+<div class="flex-1">
+<p class="font-medium text-on-surface">•••• 9812</p>
+<p class="text-label-md text-on-surface-variant">Expires 08/25</p>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant group-hover:text-error opacity-0 group-hover:opacity-100 transition-all">delete</button>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-xl p-lg">
+<h3 class="font-headline-md text-on-surface mb-md">Billing Contact</h3>
+<div class="space-y-sm">
+<div>
+<p class="text-label-md text-on-surface-variant">Billing Email</p>
+<p class="text-body-md text-on-surface">accounts@stratospheremgmt.com</p>
+</div>
+<div>
+<p class="text-label-md text-on-surface-variant">Company Address</p>
+<p class="text-body-md text-on-surface">750 North Saint Paul St, Suite 250<br>Dallas, TX 75201</p>
+</div>
+<button class="text-primary text-label-md mt-sm hover:underline">Edit Details</button>
+</div>
+</div>
+</div>
+<!-- Billing History Table -->
+<div class="col-span-12 lg:col-span-7 glass-card rounded-xl overflow-hidden flex flex-col">
+<div class="p-lg">
+<h3 class="font-headline-md text-on-surface">Billing History</h3>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low text-label-md text-on-surface-variant border-b border-outline-variant">
+<tr>
+<th class="px-lg py-sm font-medium">Invoice ID</th>
+<th class="px-lg py-sm font-medium">Date</th>
+<th class="px-lg py-sm font-medium">Amount</th>
+<th class="px-lg py-sm font-medium">Status</th>
+<th class="px-lg py-sm font-medium text-right">Download</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-lg py-md font-code-sm text-on-surface">INV-2024-007</td>
+<td class="px-lg py-md text-on-surface-variant">Jul 15, 2024</td>
+<td class="px-lg py-md text-on-surface font-medium">R1,250.00</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-bold uppercase tracking-tighter border border-emerald-500/20">Paid</span>
+</td>
+<td class="px-lg py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">picture_as_pdf</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-lg py-md font-code-sm text-on-surface">INV-2024-006</td>
+<td class="px-lg py-md text-on-surface-variant">Jun 15, 2024</td>
+<td class="px-lg py-md text-on-surface font-medium">R1,250.00</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-bold uppercase tracking-tighter border border-emerald-500/20">Paid</span>
+</td>
+<td class="px-lg py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">picture_as_pdf</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-lg py-md font-code-sm text-on-surface">INV-2024-005</td>
+<td class="px-lg py-md text-on-surface-variant">May 15, 2024</td>
+<td class="px-lg py-md text-on-surface font-medium">R1,250.00</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-bold uppercase tracking-tighter border border-emerald-500/20">Paid</span>
+</td>
+<td class="px-lg py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">picture_as_pdf</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-lg py-md font-code-sm text-on-surface">INV-2024-004</td>
+<td class="px-lg py-md text-on-surface-variant">Apr 15, 2024</td>
+<td class="px-lg py-md text-on-surface font-medium">R1,250.00</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-bold uppercase tracking-tighter border border-emerald-500/20">Paid</span>
+</td>
+<td class="px-lg py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">picture_as_pdf</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-lg py-md font-code-sm text-on-surface">INV-2024-003</td>
+<td class="px-lg py-md text-on-surface-variant">Mar 15, 2024</td>
+<td class="px-lg py-md text-on-surface font-medium">R1,100.00</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-bold uppercase tracking-tighter border border-emerald-500/20">Paid</span>
+</td>
+<td class="px-lg py-md text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">picture_as_pdf</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-md flex justify-center bg-surface-container-low border-t border-outline-variant">
+<button class="text-label-md text-on-surface-variant hover:text-primary transition-colors">View All Invoices</button>
+</div>
+</div>
+</div>
+<!-- Footer Policy Info -->
+<div class="mt-xl text-center">
+<p class="text-label-md text-on-surface-variant opacity-50">
+                Terms of Service apply. All transactions are secure and encrypted. Need help with billing? <a class="underline hover:text-primary transition-colors" href="#">Contact Support</a>
+</p>
+</div>
+</div>
+</main>
+<script>
+    // Micro-interaction for the billing table rows
+    document.querySelectorAll('tr').forEach(row => {
+        row.addEventListener('click', () => {
+            const id = row.querySelector('.font-code-sm')?.textContent;
+            if (id) console.log(`Selected Invoice: ${id}`);
+        });
+    });
+
+    // Hover effect for the property limit bar
+    const progressBar = document.querySelector('.bg-primary.h-full');
+    if (progressBar) {
+        progressBar.addEventListener('mouseover', () => {
+            progressBar.classList.add('shadow-[0_0_24px_rgba(192,193,255,0.7)]');
+        });
+        progressBar.addEventListener('mouseout', () => {
+            progressBar.classList.remove('shadow-[0_0_24px_rgba(192,193,255,0.7)]');
+        });
+    }
+
+    // Glass card mouse interaction matching SCREEN_2 style
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+</script>
+
+
+</body></html>

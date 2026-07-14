@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Permissions | ProManage Elite Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=Geist:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(28, 28, 28, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #262626;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #121414;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #464554;
+            border-radius: 10px;
+        }
+        /* Toggle Styling */
+        .toggle-checkbox:checked + .toggle-slot {
+            background-color: #c0c1ff;
+        }
+        .toggle-checkbox:checked + .toggle-slot .toggle-dot {
+            transform: translateX(100%);
+            background-color: #1000a9;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#07006c",
+                        "on-primary-container": "#0d0096",
+                        "outline": "#908fa0",
+                        "surface-variant": "#343535",
+                        "surface-container-lowest": "#0d0e0f",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "surface-container-low": "#1a1c1c",
+                        "on-secondary": "#00344d",
+                        "on-tertiary": "#4f2500",
+                        "surface-container": "#1e2020",
+                        "primary": "#c0c1ff",
+                        "secondary": "#89ceff",
+                        "inverse-on-surface": "#2f3131",
+                        "on-secondary-container": "#00344e",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "inverse-surface": "#e3e2e2",
+                        "inverse-primary": "#494bd6",
+                        "primary-fixed": "#e1e0ff",
+                        "error": "#ffb4ab",
+                        "surface": "#121414",
+                        "on-surface": "#e3e2e2",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-background": "#e3e2e2",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "tertiary": "#ffb783",
+                        "background": "#121414",
+                        "on-surface-variant": "#c7c4d7",
+                        "surface-dim": "#121414",
+                        "surface-bright": "#38393a",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "outline-variant": "#464554",
+                        "on-primary": "#1000a9",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-secondary-fixed": "#001e2f",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "tertiary-fixed": "#ffdcc5",
+                        "surface-tint": "#c0c1ff",
+                        "secondary-container": "#00a2e6",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#292a2a",
+                        "primary-container": "#8083ff",
+                        "on-tertiary-fixed": "#301400",
+                        "on-tertiary-container": "#452000",
+                        "tertiary-container": "#d97721",
+                        "surface-container-highest": "#343535"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "margin-desktop": "32px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "2xl": "64px",
+                        "xl": "40px",
+                        "gutter": "20px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "code-sm": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Geist"],
+                        "headline-xl": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30 custom-scrollbar">
+<!-- SideNavBar (from COMPONENTS_4) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-lg px-md bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant w-64 z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tight">ProManage</h1>
+<p class="text-on-surface-variant text-label-md font-label-md">Elite Portfolio</p>
+</div>
+<nav class="flex-1 space-y-xs overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabDashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabProperties.html">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-body-md">Properties</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabTenants.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Tenants</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabLeases.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md">Leases</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabPayments.html">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Payments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabExpense.html">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-body-md">Expenses</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabMaintenance.html">
+<span class="material-symbols-outlined">build</span>
+<span class="font-body-md">Maintenance</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabDocuments.html">
+<span class="material-symbols-outlined">folder</span>
+<span class="font-body-md">Documents</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="tabReports.html">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-body-md">Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-surface-container-high text-primary font-bold border-r-2 border-primary transition-colors" href="settingsProfile.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-md rounded-xl font-bold hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="font-label-md">Add Property</span>
+</button>
+</div>
+</aside>
+<!-- TopAppBar (from COMPONENTS_4) -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-surface dark:bg-surface border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-full py-sm pl-xl pr-md text-body-md focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-outline" placeholder="Search portfolio..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-opacity">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-opacity">help_outline</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwfjOkX1WQe7yd7EA-_EjWQua2GPHeVvzUkadRRbsoZM7J2s7uwDQ8YyGVkIA4xrGUZXtXqnZ910TtLMuzG7ez99T9DTI6GQ4-lXNv98F7bp-BepSfReDej6YQnUGy3F4rp_Rii-ZZiRppTuiOIIPXu0BjHL12sVeo_TsJwo_0tStpwteO9W-E2o6mPIkEoXlDiytirNWoCcGP4v5w5xO9I_kBH0GTSngRjYax37TvWuW4Sd2vAr3Q0qyoG7wzOxIEAB2sHoOySGWR"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-margin-desktop min-h-screen">
+<div class="max-w-6xl mx-auto space-y-xl">
+<!-- Header Structure (as per edit request 1 & SCREEN_2) -->
+<div class="space-y-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Account Settings</h2>
+<p class="text-on-surface-variant font-body-md">Manage your personal profile, security, and enterprise team settings.</p>
+</div>
+<!-- Tab Navigation (as per edit request 2) -->
+<div class="flex items-center gap-xl border-b border-outline-variant overflow-x-auto custom-scrollbar whitespace-nowrap">
+<a class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all" href="#">Profile</a>
+<a class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all" href="#">Security</a>
+<a class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all" href="#">Team</a>
+<a class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all" href="#">Notifications</a>
+<a class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all" href="#">Billing</a>
+<a class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all" href="#">Integrations</a>
+<a class="pb-md font-label-md text-label-md border-b-2 border-primary text-primary font-bold transition-all" href="#">Permissions</a>
+</div>
+</div>
+<!-- Permissions UI -->
+<div class="flex flex-col lg:flex-row gap-lg">
+<!-- Left Sidebar: Role Selector -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="space-y-sm">
+<p class="font-label-md text-outline px-sm uppercase tracking-widest mb-md">System Roles</p>
+<button class="w-full text-left p-md rounded-xl bg-surface-container border border-outline-variant shadow-sm transition-all group border-l-4 border-l-primary">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-bold text-on-surface">Admin</span>
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<p class="text-xs text-outline leading-tight">Full access to all modules and system settings.</p>
+</button>
+<button class="w-full text-left p-md rounded-xl bg-surface-container-low border border-transparent hover:border-outline-variant transition-all group">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-bold text-on-surface-variant group-hover:text-on-surface">Property Manager</span>
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface text-[18px]">real_estate_agent</span>
+</div>
+<p class="text-xs text-outline leading-tight">Manage properties, tenants and leases.</p>
+</button>
+<button class="w-full text-left p-md rounded-xl bg-surface-container-low border border-transparent hover:border-outline-variant transition-all group">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-bold text-on-surface-variant group-hover:text-on-surface">Maintenance Tech</span>
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface text-[18px]">build</span>
+</div>
+<p class="text-xs text-outline leading-tight">Restricted to work orders and vendor management.</p>
+</button>
+<button class="w-full text-left p-md rounded-xl bg-surface-container-low border border-transparent hover:border-outline-variant transition-all group">
+<div class="flex items-center justify-between mb-xs">
+<span class="font-bold text-on-surface-variant group-hover:text-on-surface">Viewer</span>
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface text-[18px]">visibility</span>
+</div>
+<p class="text-xs text-outline leading-tight">Read-only access to reports and property data.</p>
+</button>
+</div>
+<div class="mt-xl p-md rounded-xl border border-dashed border-outline-variant flex flex-col items-center justify-center text-center group cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-outline group-hover:text-primary mb-sm">add_circle</span>
+<p class="font-label-md text-outline group-hover:text-primary">Create Custom Role</p>
+</div>
+</aside>
+<!-- Right Content: Permissions Grid -->
+<div class="flex-1 pb-2xl">
+<div class="mb-lg flex justify-between items-end">
+<div>
+<h3 class="font-headline-md text-headline-md">Role: Admin</h3>
+<p class="text-outline">Defining capabilities for top-level stakeholders.</p>
+</div>
+<div class="flex items-center space-x-md text-sm text-outline">
+<div class="flex items-center"><span class="w-2 h-2 rounded-full bg-primary mr-xs"></span> Enabled</div>
+<div class="flex items-center"><span class="w-2 h-2 rounded-full bg-outline-variant mr-xs"></span> Disabled</div>
+</div>
+</div>
+<!-- Module sections using SCREEN_2 style card treatments (glass-card) -->
+<!-- Module: Properties -->
+<section class="mb-lg">
+<div class="flex items-center space-x-sm mb-md pb-xs border-b border-outline-variant">
+<span class="material-symbols-outlined text-primary">domain</span>
+<h4 class="font-bold uppercase tracking-wider text-sm">Properties</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Create Properties</p>
+<p class="text-xs text-outline">Allow adding new physical assets to the system.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Edit Basic Info</p>
+<p class="text-xs text-outline">Modify addresses, unit types, and amenities.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Archive Properties</p>
+<p class="text-xs text-outline">Soft-delete properties from active management.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">View Financials</p>
+<p class="text-xs text-outline">Access P&amp;L and rent rolls for specific properties.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Module: Tenants -->
+<section class="mb-lg">
+<div class="flex items-center space-x-sm mb-md pb-xs border-b border-outline-variant">
+<span class="material-symbols-outlined text-primary">group</span>
+<h4 class="font-bold uppercase tracking-wider text-sm">Tenants</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Background Screening</p>
+<p class="text-xs text-outline">Initiate and view credit/criminal reports.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Lease Editing</p>
+<p class="text-xs text-outline">Draft and modify legal lease agreements.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Communication</p>
+<p class="text-xs text-outline">Send mass SMS/Email and respond to queries.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Module: Financials -->
+<section class="mb-lg">
+<div class="flex items-center space-x-sm mb-md pb-xs border-b border-outline-variant">
+<span class="material-symbols-outlined text-primary">payments</span>
+<h4 class="font-bold uppercase tracking-wider text-sm">Financials</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Record Expenses</p>
+<p class="text-xs text-outline">Log invoices and manual payments.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Manage Bank Links</p>
+<p class="text-xs text-outline">Connect/disconnect Stripe and Plaid accounts.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Module: Maintenance -->
+<section class="mb-lg">
+<div class="flex items-center space-x-sm mb-md pb-xs border-b border-outline-variant">
+<span class="material-symbols-outlined text-primary">build</span>
+<h4 class="font-bold uppercase tracking-wider text-sm">Maintenance</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Assign Vendors</p>
+<p class="text-xs text-outline">Dispatch work orders to specific contractors.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Approve Quotes</p>
+<p class="text-xs text-outline">Authorize repair costs above threshold.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Module: Team -->
+<section class="mb-lg">
+<div class="flex items-center space-x-sm mb-md pb-xs border-b border-outline-variant">
+<span class="material-symbols-outlined text-primary">badge</span>
+<h4 class="font-bold uppercase tracking-wider text-sm">Team</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Invite Members</p>
+<p class="text-xs text-outline">Send email invites to new staff members.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+<div class="glass-card p-md rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors">
+<div>
+<p class="font-semibold text-on-surface">Edit Permissions</p>
+<p class="text-xs text-outline">Modify access levels for existing accounts.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-10 h-5 bg-outline-variant rounded-full toggle-slot transition-colors duration-300 relative">
+<div class="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full toggle-dot transition-transform duration-300 transform"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Sticky Footer (preserving the save/discard buttons and audit log info) -->
+<footer class="fixed bottom-0 right-0 left-64 h-20 bg-surface/90 backdrop-blur-xl border-t border-outline-variant z-40 flex items-center justify-between px-margin-desktop">
+<div class="flex items-center space-x-md">
+<span class="text-xs text-outline italic">Last modified by Sarah J. at 10:45 AM today</span>
+</div>
+<div class="flex items-center space-x-md">
+<button class="px-xl py-md rounded-xl font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">
+                    Discard Changes
+                </button>
+<button class="px-xl py-md bg-primary text-on-primary rounded-xl font-bold shadow-lg shadow-primary/20 hover:opacity-80 transition-all">
+                    Save Changes
+                </button>
+</div>
+</footer>
+</main>
+<script>
+        // Switch role active state logic
+        document.querySelectorAll('aside button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Check if it's a role button
+                if (this.closest('.space-y-sm')) {
+                    document.querySelectorAll('aside button').forEach(b => {
+                        b.classList.remove('border-l-4', 'border-l-primary', 'bg-surface-container');
+                        b.classList.add('bg-surface-container-low', 'border-transparent');
+                        const label = b.querySelector('span:first-child');
+                        if (label) {
+                            label.classList.remove('text-on-surface');
+                            label.classList.add('text-on-surface-variant');
+                        }
+                    });
+                    this.classList.add('border-l-4', 'border-l-primary', 'bg-surface-container');
+                    this.classList.remove('bg-surface-container-low', 'border-transparent');
+                    const activeLabel = this.querySelector('span:first-child');
+                    if (activeLabel) {
+                        activeLabel.classList.add('text-on-surface');
+                        activeLabel.classList.remove('text-on-surface-variant');
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>
