@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Settings - Notifications | ProManage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=Geist:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(28, 28, 28, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #262626;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #121414;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #464554;
+            border-radius: 10px;
+        }
+        /* Custom Toggle Switch - Adjusted to match SCREEN_2 style or standard refined UI */
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #c0c1ff; /* primary */
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            transform: translateX(100%);
+            background-color: #1000a9; /* on-primary */
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#07006c",
+                        "on-primary-container": "#0d0096",
+                        "outline": "#908fa0",
+                        "surface-variant": "#343535",
+                        "surface-container-lowest": "#0d0e0f",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "surface-container-low": "#1a1c1c",
+                        "on-secondary": "#00344d",
+                        "on-tertiary": "#4f2500",
+                        "surface-container": "#1e2020",
+                        "primary": "#c0c1ff",
+                        "secondary": "#89ceff",
+                        "inverse-on-surface": "#2f3131",
+                        "on-secondary-container": "#00344e",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "inverse-surface": "#e3e2e2",
+                        "inverse-primary": "#494bd6",
+                        "primary-fixed": "#e1e0ff",
+                        "error": "#ffb4ab",
+                        "surface": "#121414",
+                        "on-surface": "#e3e2e2",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-background": "#e3e2e2",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "tertiary": "#ffb783",
+                        "background": "#121414",
+                        "on-surface-variant": "#c7c4d7",
+                        "surface-dim": "#121414",
+                        "surface-bright": "#38393a",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "outline-variant": "#464554",
+                        "on-primary": "#1000a9",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-secondary-fixed": "#001e2f",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "tertiary-fixed": "#ffdcc5",
+                        "surface-tint": "#c0c1ff",
+                        "secondary-container": "#00a2e6",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#292a2a",
+                        "primary-container": "#8083ff",
+                        "on-tertiary-fixed": "#301400",
+                        "on-tertiary-container": "#452000",
+                        "tertiary-container": "#d97721",
+                        "surface-container-highest": "#343535"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "margin-desktop": "32px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "2xl": "64px",
+                        "xl": "40px",
+                        "gutter": "20px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "code-sm": ["Geist"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Geist"],
+                        "headline-xl": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30 custom-scrollbar">
+<!-- SideNavBar - Using established structure from {{DATA:COMPONENTS:COMPONENTS_4}} -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-lg px-md bg-surface-container border-r border-outline-variant w-64 z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">ProManage</h1>
+<p class="text-on-surface-variant text-label-md font-label-md">Elite Portfolio</p>
+</div>
+<nav class="flex-1 space-y-xs overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-body-md">Properties</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Tenants</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md">Leases</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Payments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-body-md">Expenses</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">build</span>
+<span class="font-body-md">Maintenance</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">folder</span>
+<span class="font-body-md">Documents</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-body-md">Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-surface-container-high text-primary font-bold border-r-2 border-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-md rounded-xl font-bold hover:opacity-80 transition-opacity active:scale-95 shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="font-label-md">Add Property</span>
+</button>
+</div>
+</aside>
+<!-- TopAppBar - Using established structure from {{DATA:COMPONENTS:COMPONENTS_4}} -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-surface border-b border-outline-variant flex items-center justify-between px-margin-desktop z-40">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-full py-sm pl-xl pr-md text-body-md focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-outline" placeholder="Search portfolio..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-opacity">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-opacity">help_outline</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJSp7saRUzJxHp7zrCyTVWXlGnsgnlKta43OkR2Pi1KcqXAn1CEsVNPtBKeFAqfXnO-Lm9AuZ-gt4218TwRtTJ7SDaOuoDwclnlVKzvD_8974lDQUQRV2rNuUI4VWDBMa4Ng1--m4ZCKIyppxBDfHYEB_x0cZx_lspIhllFG-twRfItq1iw9vNRixBfjPSynhyJuiX7-_bgmq4Acpb4vbi8j8H_sNSWa5z4DB3O1GB97Vwh_jWUjehcdF1UoMEqwtbj9gAICfj5K1k"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-margin-desktop min-h-screen">
+<div class="max-w-6xl mx-auto space-y-xl">
+<!-- Header Structure from SCREEN_2 -->
+<div class="space-y-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Account Settings</h2>
+<p class="text-on-surface-variant font-body-md">Manage your personal profile, security, and enterprise team settings.</p>
+</div>
+<!-- Tab Navigation - Updated with new tabs and Notifications active -->
+<div class="flex items-center gap-xl border-b border-outline-variant overflow-x-auto no-scrollbar">
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all whitespace-nowrap">Profile</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all whitespace-nowrap">Security</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all whitespace-nowrap">Team</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-primary text-primary transition-all whitespace-nowrap">Notifications</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all whitespace-nowrap">Billing</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all whitespace-nowrap">Integrations</button>
+<button class="pb-md font-label-md text-label-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-all whitespace-nowrap">Permissions</button>
+</div>
+</div>
+<!-- Content Area: Notification Preferences -->
+<div class="grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-8 space-y-lg">
+<!-- Maintenance Alerts Group -->
+<section class="glass-card rounded-xl overflow-hidden">
+<div class="p-lg bg-surface-container-low border-b border-outline-variant flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/20 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined">build</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Maintenance Alerts</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Critical updates regarding property repairs and urgent requests.</p>
+</div>
+</div>
+<div class="p-lg space-y-md">
+<!-- Item 1 -->
+<div class="flex items-center justify-between py-sm">
+<div class="space-y-xs pr-md">
+<p class="font-body-lg text-on-surface font-medium">New Service Requests</p>
+<p class="font-body-md text-on-surface-variant">Notify when a tenant submits a new maintenance issue.</p>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex flex-col items-center gap-xs">
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase">Email</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors">
+<div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="flex flex-col items-center gap-xs">
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase">In-App</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors">
+<div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="flex flex-col items-center gap-xs">
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase">Push</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors">
+<div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<div class="h-px bg-outline-variant/30"></div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between py-sm">
+<div class="space-y-xs pr-md">
+<p class="font-body-lg text-on-surface font-medium">Work Order Updates</p>
+<p class="font-body-md text-on-surface-variant">Updates on vendor assignments and completion status.</p>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex flex-col items-center gap-xs">
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase">Email</span>
+<label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label>
+</div>
+<div class="flex flex-col items-center gap-xs">
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase">In-App</span>
+<label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label>
+</div>
+<div class="flex flex-col items-center gap-xs">
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase">Push</span>
+<label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Notifications Group -->
+<section class="glass-card rounded-xl overflow-hidden">
+<div class="p-lg bg-surface-container-low border-b border-outline-variant flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary-container">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Payment Notifications</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Stay on top of rent collection and transaction failures.</p>
+</div>
+</div>
+<div class="p-lg space-y-md">
+<div class="flex items-center justify-between py-sm">
+<div class="space-y-xs pr-md">
+<p class="font-body-lg text-on-surface font-medium">Rent Received</p>
+<p class="font-body-md text-on-surface-variant">Alert me when a tenant completes a payment.</p>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">Email</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">In-App</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">Push</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+</div>
+</div>
+<div class="h-px bg-outline-variant/30"></div>
+<div class="flex items-center justify-between py-sm">
+<div class="space-y-xs pr-md">
+<p class="font-body-lg text-on-surface font-medium">Failed Transactions</p>
+<p class="font-body-md text-on-surface-variant">Immediate notice of bounced checks or declined cards.</p>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">Email</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">In-App</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">Push</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Lease Milestones Group -->
+<section class="glass-card rounded-xl overflow-hidden">
+<div class="p-lg bg-surface-container-low border-b border-outline-variant flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Lease Milestones</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Keep track of renewals, expirations, and new lease signings.</p>
+</div>
+</div>
+<div class="p-lg space-y-md">
+<div class="flex items-center justify-between py-sm">
+<div class="space-y-xs pr-md">
+<p class="font-body-lg text-on-surface font-medium">Upcoming Expirations</p>
+<p class="font-body-md text-on-surface-variant">Notices for leases expiring in 90, 60, and 30 days.</p>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">Email</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">In-App</span><label class="relative inline-flex items-center cursor-pointer"><input class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">Push</span><label class="relative inline-flex items-center cursor-pointer"><input class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+</div>
+</div>
+<div class="h-px bg-outline-variant/30"></div>
+<div class="flex items-center justify-between py-sm">
+<div class="space-y-xs pr-md">
+<p class="font-body-lg text-on-surface font-medium">New Signature Alerts</p>
+<p class="font-body-md text-on-surface-variant">Notify when a digital lease is signed by all parties.</p>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">Email</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">In-App</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+<div class="flex flex-col items-center gap-xs"><span class="font-label-md text-[10px] text-on-surface-variant uppercase">Push</span><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only toggle-checkbox" type="checkbox"/><div class="w-9 h-5 bg-surface-container-highest rounded-full toggle-label transition-colors"><div class="toggle-dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out shadow-sm"></div></div></label></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="flex items-center justify-end gap-md pt-lg">
+<button class="px-xl py-md rounded-xl font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Discard Changes</button>
+<button class="px-xl py-md bg-primary text-on-primary rounded-xl font-bold hover:opacity-80 transition-all shadow-lg shadow-primary/10">Save Preferences</button>
+</div>
+</div>
+<!-- Sidebar Contextual Info (Matches SCREEN_2 right column layout) -->
+<div class="col-span-12 lg:col-span-4 space-y-lg">
+<div class="glass-card rounded-xl p-lg border-l-4 border-l-primary flex flex-col items-center text-center">
+<div class="text-secondary font-headline-lg text-headline-lg mb-xs">100%</div>
+<p class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">Delivery Rate</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Your primary email is verified and active.</p>
+</div>
+<div class="glass-card p-lg rounded-xl overflow-hidden relative">
+<div class="z-10 relative">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-xs">Optimization Tip</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Property managers who enable "Push" for maintenance alerts resolve tickets 24% faster on average.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[100px] text-primary">auto_awesome</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+    // Micro-interactions for toggles
+    document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+        toggle.addEventListener('change', (e) => {
+            const card = e.target.closest('.glass-card');
+            card.classList.add('ring-1', 'ring-primary/20');
+            setTimeout(() => {
+                card.classList.remove('ring-1', 'ring-primary/20');
+            }, 400);
+        });
+    });
+
+    // Glass card subtle parallax (restrained version)
+    document.addEventListener('mousemove', (e) => {
+        const cards = document.querySelectorAll('.glass-card');
+        const x = (e.clientX / window.innerWidth - 0.5) * 5;
+        const y = (e.clientY / window.innerHeight - 0.5) * 5;
+        
+        cards.forEach(card => {
+            card.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    });
+</script>
+</body></html>

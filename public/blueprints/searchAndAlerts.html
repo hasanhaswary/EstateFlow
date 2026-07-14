@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EstateFlow | Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel {
+            background: rgba(28, 28, 28, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(38, 38, 38, 1);
+        }
+        .etched-input {
+            background: #0a0a0a;
+            border: 1px solid #262626;
+        }
+        .etched-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 10px;
+        }
+        .notification-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .notification-card:hover {
+            background: rgba(38, 38, 38, 0.5);
+            transform: translateX(4px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#292a2a",
+                        "background": "#121414",
+                        "inverse-primary": "#494bd6",
+                        "tertiary": "#ffb783",
+                        "inverse-surface": "#e3e2e2",
+                        "on-secondary-container": "#00344e",
+                        "on-secondary-fixed": "#001e2f",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-background": "#e3e2e2",
+                        "primary-fixed": "#e1e0ff",
+                        "primary": "#c0c1ff",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "surface-bright": "#38393a",
+                        "on-primary-fixed": "#07006c",
+                        "tertiary-fixed": "#ffdcc5",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "surface-container": "#1e2020",
+                        "on-error": "#690005",
+                        "on-primary-container": "#0d0096",
+                        "outline-variant": "#464554",
+                        "inverse-on-surface": "#2f3131",
+                        "on-surface-variant": "#c7c4d7",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#452000",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0d0e0f",
+                        "on-tertiary-fixed": "#301400",
+                        "surface-container-low": "#1a1c1c",
+                        "secondary": "#89ceff",
+                        "tertiary-container": "#d97721",
+                        "surface-dim": "#121414",
+                        "surface-container-highest": "#343535",
+                        "on-secondary": "#00344d",
+                        "on-primary": "#1000a9",
+                        "primary-container": "#8083ff",
+                        "on-surface": "#e3e2e2",
+                        "surface-variant": "#343535",
+                        "secondary-container": "#00a2e6",
+                        "surface-tint": "#c0c1ff",
+                        "outline": "#908fa0",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#121414",
+                        "on-tertiary": "#4f2500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "md": "16px",
+                        "margin-mobile": "16px",
+                        "gutter": "20px",
+                        "margin-desktop": "32px",
+                        "xl": "40px",
+                        "base": "4px",
+                        "2xl": "64px",
+                        "xs": "4px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Geist"],
+                        "headline-xl": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary selection:text-on-primary min-h-screen">
+<!-- Sidebar Shell (From JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface-container flex flex-col p-4 gap-2 z-40 hidden lg:flex">
+<div class="mb-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">domain</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">EstateFlow</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Management Pro</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-label-md text-label-md">Properties</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Tenants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">build</span>
+<span class="font-label-md text-label-md">Maintenance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-lg" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 min-h-screen relative overflow-hidden">
+<!-- Top App Bar Shell (From JSON) -->
+<header class="sticky top-0 z-30 bg-surface border-b border-outline-variant shadow-sm w-full">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined lg:hidden cursor-pointer">menu</span>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">EstateFlow Tenant Portal</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant hover:text-on-surface transition-all" id="search-trigger">
+<span class="material-symbols-outlined text-[20px]">search</span>
+<span class="font-label-md text-label-md hidden sm:inline">Search...</span>
+<kbd class="hidden md:flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-container text-[10px] border border-outline-variant">⌘K</kbd>
+</button>
+<button class="relative hover:opacity-80 transition-opacity" id="notification-trigger">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-error text-on-error text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+</button>
+<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+</div>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Secure Logout</button>
+</div>
+</div>
+</header>
+<!-- Command Center Overlay (Global Search & Notifications) -->
+<div class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 sm:px-6" id="command-center">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="command-backdrop"></div>
+<!-- UI Container -->
+<div class="relative w-full max-w-4xl glass-panel rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-[716px] md:h-[600px]">
+<!-- Left Section: Search Results -->
+<div class="flex-1 flex flex-col min-w-0 border-r border-outline-variant">
+<!-- Search Input Row -->
+<div class="p-6 border-b border-outline-variant flex items-center gap-4 bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[28px]">search</span>
+<input autofocus="" class="flex-1 bg-transparent border-none focus:ring-0 text-headline-md font-headline-md placeholder:text-on-surface-variant/40" placeholder="Search properties, tenants, or lease documents..." type="text"/>
+<kbd class="hidden sm:inline-block px-2 py-1 rounded bg-surface-container-high text-xs text-on-surface-variant border border-outline-variant">ESC</kbd>
+</div>
+<!-- Scrollable Results -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8">
+<!-- Category: Properties -->
+<div>
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-label-md text-label-md text-primary tracking-widest uppercase">Properties</h3>
+<span class="text-[10px] bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">4 Found</span>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center" data-alt="A luxurious modern high-rise residential building with floor-to-ceiling windows, reflecting a vibrant sunset in a high-contrast architectural style. The scene is rendered with deep indigo shadows and crisp metallic highlights, fitting a premium dark-mode management interface aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBhHOShIJMCq7Bx94aYrNx9UQ6VB7iQk0xYvBDSzR6SPwTWTJdNYNBEJWVOqK5C8k2fN3lTz7iDcfnpSugWAsSjzJsqD99-r8qPP0Q8wmBqyLvzsL9E5elJ1JDG_JGQz75ZMfcq8kfH6zrag_C2hrKhUAlusgKQDG9_jqcFE9E5zbm25fSTNIKwXaKlec8tyM8SqOFpinQQtEF8VdJqwsPAugRnIkHho3CwLbqV0dE6_OWBY5dxr8A5lKKvdaAbj8pW2kPMMC0wa9cc')"></div>
+<div class="flex-1">
+<p class="font-body-lg text-on-surface group-hover:text-primary transition-colors">The Obsidian Lofts, Unit 402</p>
+<p class="text-xs text-on-surface-variant">128 Market Street, San Francisco</p>
+</div>
+<div class="hidden sm:block text-right">
+<p class="text-sm font-label-md text-on-surface">$4,500/mo</p>
+<span class="text-[10px] text-primary">Leased</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-cover bg-center" data-alt="An elegant boutique apartment complex with a minimalist black stone facade and warm interior lighting visible through large glass panels. The atmosphere is sophisticated and high-end, featuring professional architectural photography techniques with a moody, dark-mode color palette of grays and deep blues." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuzfWmU2A92QOnGA1dCaLtgvUOfMhLKkiBPLy1xbWS9WE2dXrVqmW5PIcFLj4saBj7jmTwJ9Zijc_zmOugBEVMCcgvkxOgSaI_YyJoHDW0jbsQQXPfGuFPs2NlIl-1KcN2pQn79FvgnO8vtHMM4VB__9IkUAr2exS--ihXbDOCbr0gxSUFiO5iXpp7pvoUdXswI2_S2x_k7j5mhJ8G_PhuMnMEBkCJAmZfrwlxFbyna-Lx3z536a86jLAyyBx2-yeRTqJChgE3EvA_')"></div>
+<div class="flex-1">
+<p class="font-body-lg text-on-surface group-hover:text-primary transition-colors">Vanguard Heights</p>
+<p class="text-xs text-on-surface-variant">902 Elite Parkway, Austin</p>
+</div>
+<div class="hidden sm:block text-right">
+<p class="text-sm font-label-md text-on-surface">$3,200/mo</p>
+<span class="text-[10px] text-tertiary">Maintenance</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Category: Tenants -->
+<div>
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-label-md text-label-md text-primary tracking-widest uppercase">Tenants</h3>
+<span class="text-[10px] bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">2 Found</span>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-secondary-container text-on-secondary-container font-bold">EM</div>
+<div class="flex-1">
+<p class="font-body-lg text-on-surface group-hover:text-primary transition-colors">Elena Martinez</p>
+<p class="text-xs text-on-surface-variant">Active Tenant • Obsidian Lofts 402</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-tertiary text-on-tertiary font-bold">JR</div>
+<div class="flex-1">
+<p class="font-body-lg text-on-surface group-hover:text-primary transition-colors">James Roth</p>
+<p class="text-xs text-on-surface-variant">Pending Renewal • Vanguard Heights</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Category: Documents -->
+<div>
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-label-md text-label-md text-primary tracking-widest uppercase">Documents</h3>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container group cursor-pointer border border-transparent hover:border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">picture_as_pdf</span>
+<div class="flex-1">
+<p class="text-sm text-on-surface">Lease_Agreement_V4_Martinez.pdf</p>
+<p class="text-[10px] text-on-surface-variant">Modified 2 days ago • 4.2 MB</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container group cursor-pointer border border-transparent hover:border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">description</span>
+<div class="flex-1">
+<p class="text-sm text-on-surface">Inspection_Report_July_2023.docx</p>
+<p class="text-[10px] text-on-surface-variant">Modified 1 week ago • 1.1 MB</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Section: Notifications Panel -->
+<div class="w-full md:w-80 bg-surface-container-low/50 flex flex-col">
+<div class="p-6 border-b border-outline-variant flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md">Alerts</h3>
+<button class="text-primary text-[10px] font-bold hover:underline">MARK ALL READ</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<!-- Maintenance Category -->
+<div class="p-4 space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Maintenance</p>
+</div>
+<!-- Maintenance Item -->
+<div class="notification-card p-4 rounded-xl glass-panel relative group">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]">build</span>
+<span class="text-[10px] text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-sm font-semibold text-on-surface mb-1">Water Leak Reported</p>
+<p class="text-xs text-on-surface-variant mb-4 leading-relaxed">Unit 402 - Master bathroom ceiling. "Emergent" status assigned.</p>
+<div class="flex gap-2">
+<button class="flex-1 py-2 text-[11px] font-bold bg-primary text-on-primary rounded-lg hover:brightness-110 transition-all">Approve Request</button>
+<button class="px-3 py-2 text-[11px] font-bold border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container transition-colors">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Payments Category -->
+<div class="p-4 space-y-4 border-t border-outline-variant">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Payments</p>
+</div>
+<!-- Payment Item -->
+<div class="notification-card p-4 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">payments</span>
+<span class="text-[10px] text-on-surface-variant">5h ago</span>
+</div>
+<p class="text-sm font-semibold text-on-surface">Payment Received</p>
+<p class="text-xs text-on-surface-variant">Elena Martinez ($4,500.00)</p>
+<div class="mt-2 flex items-center text-[10px] text-primary gap-1">
+<span>View Transaction</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</div>
+</div>
+</div>
+<!-- Leases Category -->
+<div class="p-4 space-y-4 border-t border-outline-variant">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Leases</p>
+</div>
+<!-- Lease Item -->
+<div class="notification-card p-4 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary text-[20px]">history_edu</span>
+<span class="text-[10px] text-on-surface-variant">Yesterday</span>
+</div>
+<p class="text-sm font-semibold text-on-surface">Renewal Opportunity</p>
+<p class="text-xs text-on-surface-variant">James Roth (Expiring in 60 days)</p>
+<div class="mt-3">
+<button class="w-full py-2 text-[11px] font-bold border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors">View Lease</button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant bg-surface-container-high/30">
+<button class="w-full text-center text-xs text-on-surface-variant hover:text-on-surface transition-colors">See all past notifications</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Dashboard Placeholder Content (Background) -->
+<div class="p-8 max-w-7xl mx-auto space-y-8 opacity-20 pointer-events-none select-none">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="h-32 rounded-2xl glass-panel"></div>
+<div class="h-32 rounded-2xl glass-panel"></div>
+<div class="h-32 rounded-2xl glass-panel"></div>
+<div class="h-32 rounded-2xl glass-panel"></div>
+</div>
+<div class="h-[400px] rounded-2xl glass-panel"></div>
+</div>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        const commandCenter = document.getElementById('command-center');
+        const backdrop = document.getElementById('command-backdrop');
+        const triggerSearch = document.getElementById('search-trigger');
+        const triggerNotify = document.getElementById('notification-trigger');
+
+        function toggleCommandCenter(show) {
+            if (show) {
+                commandCenter.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                commandCenter.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        triggerSearch.addEventListener('click', () => toggleCommandCenter(true));
+        triggerNotify.addEventListener('click', () => toggleCommandCenter(true));
+        backdrop.addEventListener('click', () => toggleCommandCenter(false));
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') toggleCommandCenter(false);
+            if (e.metaKey && e.key === 'k') {
+                e.preventDefault();
+                toggleCommandCenter(true);
+            }
+        });
+    </script>
+</body></html>

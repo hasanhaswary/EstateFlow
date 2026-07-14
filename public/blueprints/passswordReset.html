@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&family=Inter:wght@400;500&family=Geist:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-card {
+            background: rgba(23, 23, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #262626;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        }
+        .input-etched {
+            background-color: #0a0a0a;
+            border: 1px solid #262626;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .input-etched:focus {
+            border-color: #6366f1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+        .state-hidden {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#121414",
+                      "on-secondary-container": "#00344e",
+                      "tertiary-fixed": "#ffdcc5",
+                      "on-tertiary-fixed-variant": "#703700",
+                      "inverse-primary": "#494bd6",
+                      "primary": "#c0c1ff",
+                      "on-error": "#690005",
+                      "on-background": "#e3e2e2",
+                      "surface-variant": "#343535",
+                      "surface-container-highest": "#343535",
+                      "secondary-fixed": "#c9e6ff",
+                      "on-tertiary-container": "#452000",
+                      "error-container": "#93000a",
+                      "surface-bright": "#38393a",
+                      "primary-fixed": "#e1e0ff",
+                      "on-secondary-fixed": "#001e2f",
+                      "on-primary-container": "#0d0096",
+                      "on-secondary": "#00344d",
+                      "surface-container-lowest": "#0d0e0f",
+                      "secondary-container": "#00a2e6",
+                      "on-tertiary": "#4f2500",
+                      "surface-container-low": "#1a1c1c",
+                      "outline": "#908fa0",
+                      "primary-fixed-dim": "#c0c1ff",
+                      "on-error-container": "#ffdad6",
+                      "on-surface": "#e3e2e2",
+                      "inverse-on-surface": "#2f3131",
+                      "outline-variant": "#464554",
+                      "on-tertiary-fixed": "#301400",
+                      "surface-tint": "#c0c1ff",
+                      "secondary": "#89ceff",
+                      "on-primary-fixed-variant": "#2f2ebe",
+                      "tertiary": "#ffb783",
+                      "surface-container-high": "#292a2a",
+                      "secondary-fixed-dim": "#89ceff",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "on-surface-variant": "#c7c4d7",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#121414",
+                      "tertiary-fixed-dim": "#ffb783",
+                      "inverse-surface": "#e3e2e2",
+                      "primary-container": "#8083ff",
+                      "background": "#121414",
+                      "on-primary-fixed": "#07006c",
+                      "on-primary": "#1000a9",
+                      "surface-container": "#1e2020",
+                      "tertiary-container": "#d97721"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "2xl": "64px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "margin-desktop": "32px",
+                      "md": "16px",
+                      "margin-mobile": "16px",
+                      "gutter": "20px",
+                      "xl": "40px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Hanken Grotesk"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-md": ["Geist"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Background Atmospheric Effect -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#6366f1] opacity-[0.05] blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#00a2e6] opacity-[0.05] blur-[120px] rounded-full"></div>
+</div>
+<!-- Main Container -->
+<main class="relative z-10 w-full max-w-[440px] px-margin-mobile md:px-0">
+<!-- Logo Section -->
+<div class="flex flex-col items-center mb-xl">
+<div class="w-12 h-12 bg-primary-container rounded-xl flex items-center justify-center mb-md shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary-container text-[28px]" style="font-variation-settings: 'FILL' 1;">domain</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-black text-primary tracking-tight">EstateFlow</h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-xs">Premium Property Management</p>
+</div>
+<!-- AUTH CARD: State 1 - Forgot Password -->
+<section class="glass-card rounded-xl p-lg md:p-xl animate-fade-in" id="state-forgot">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Forgot Password</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Enter your email address and we'll send you a link to reset your password.</p>
+</div>
+<form class="space-y-lg" id="forgot-form">
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="email">EMAIL ADDRESS</label>
+<input class="w-full h-12 px-md rounded-lg input-etched text-on-surface font-body-md" id="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+<button class="w-full h-12 bg-[#6366f1] hover:bg-[#4f46e5] text-white font-label-md text-label-md rounded-lg transition-all duration-200 shadow-lg shadow-indigo-500/20 active:scale-95" type="submit">
+                    Send Reset Link
+                </button>
+</form>
+<div class="mt-xl pt-lg border-t border-outline-variant text-center">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors inline-flex items-center gap-sm" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                    Back to login
+                </a>
+</div>
+</section>
+<!-- AUTH CARD: State 2 - Check Email -->
+<section class="glass-card rounded-xl p-lg md:p-xl animate-fade-in state-hidden" id="state-check">
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center mb-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[32px]">mail</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Check your email</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">
+                    We've sent a password reset link to <span class="text-on-surface font-medium" id="display-email">your email</span>.
+                </p>
+<button class="w-full h-12 bg-surface-container-highest border border-outline-variant hover:bg-surface-variant text-on-surface font-label-md text-label-md rounded-lg transition-all duration-200 mb-lg" id="btn-to-reset">
+                    Open email app
+                </button>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Didn't receive the email? 
+                    <button class="text-primary hover:underline font-medium transition-all">Click to resend</button>
+</p>
+</div>
+<div class="mt-xl pt-lg border-t border-outline-variant text-center">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors inline-flex items-center gap-sm" onclick="toggleState('state-forgot')">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                    Back to login
+                </button>
+</div>
+</section>
+<!-- AUTH CARD: State 3 - Set New Password -->
+<section class="glass-card rounded-xl p-lg md:p-xl animate-fade-in state-hidden" id="state-reset">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Set New Password</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Your new password must be different from previously used passwords.</p>
+</div>
+<form class="space-y-lg" id="reset-form">
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="new-password">NEW PASSWORD</label>
+<div class="relative">
+<input class="w-full h-12 px-md pr-12 rounded-lg input-etched text-on-surface font-body-md" id="new-password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="confirm-password">CONFIRM PASSWORD</label>
+<div class="relative">
+<input class="w-full h-12 px-md pr-12 rounded-lg input-etched text-on-surface font-body-md" id="confirm-password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<button class="w-full h-12 bg-[#6366f1] hover:bg-[#4f46e5] text-white font-label-md text-label-md rounded-lg transition-all duration-200 shadow-lg shadow-indigo-500/20 active:scale-95" type="submit">
+                    Update Password
+                </button>
+</form>
+</section>
+<!-- Success Toast (Hidden) -->
+<div class="fixed bottom-lg left-1/2 -translate-x-1/2 glass-card px-lg py-md rounded-full border-primary/30 flex items-center gap-md state-hidden animate-fade-in" id="success-toast">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md text-on-surface">Password updated successfully. Redirecting...</span>
+</div>
+</main>
+<!-- Footer Information -->
+<footer class="mt-2xl py-lg w-full max-w-[1440px] px-margin-desktop flex flex-col md:flex-row justify-between items-center border-t border-outline-variant/30 gap-lg">
+<p class="font-label-md text-label-md text-on-surface-variant opacity-60">© 2024 EstateFlow Premium Property Management.</p>
+<div class="flex gap-lg items-center">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Security</a>
+</div>
+</footer>
+<script>
+        function toggleState(stateId) {
+            const states = ['state-forgot', 'state-check', 'state-reset'];
+            states.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === stateId) {
+                    el.classList.remove('state-hidden');
+                } else {
+                    el.classList.add('state-hidden');
+                }
+            });
+        }
+
+        // Logic for "Forgot" submission
+        document.getElementById('forgot-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            document.getElementById('display-email').innerText = email || 'your email';
+            toggleState('state-check');
+        });
+
+        // Implicit flow trigger for prototype: Open Reset
+        document.getElementById('btn-to-reset').addEventListener('click', () => {
+            toggleState('state-reset');
+        });
+
+        // Logic for "Reset" submission
+        document.getElementById('reset-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const toast = document.getElementById('success-toast');
+            toast.classList.remove('state-hidden');
+            
+            // Simulation of redirect
+            setTimeout(() => {
+                alert('Password reset successful! In a real app, you would now be redirected to the login screen.');
+                window.location.reload();
+            }, 3000);
+        });
+
+        // Micro-interactions for password visibility
+        document.querySelectorAll('button[type="button"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                const icon = this.querySelector('.material-symbols-outlined');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.innerText = 'visibility_off';
+                } else {
+                    input.type = 'password';
+                    icon.innerText = 'visibility';
+                }
+            });
+        });
+    </script>
+</body></html>
